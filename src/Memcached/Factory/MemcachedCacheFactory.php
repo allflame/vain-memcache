@@ -11,6 +11,22 @@
 
 namespace Vain\Memcache\Memcached\Factory;
 
-class MemcachedCacheFactory
+use Vain\Cache\CacheInterface;
+use Vain\Cache\Factory\AbstractCacheFactory;
+use Vain\Memcache\Memcached\Memcached;
+
+/**
+ * Class MemcachedCacheFactory
+ *
+ * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
+ */
+class MemcachedCacheFactory extends AbstractCacheFactory
 {
+    /**
+     * @inheritDoc
+     */
+    public function createCache(array $configData, $connection) : CacheInterface
+    {
+        return new Memcached($connection);
+    }
 }
