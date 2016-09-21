@@ -11,6 +11,13 @@
 
 namespace Vain\Memcache\Extension;
 
-class MemcacheExtension
+use Vain\Core\Extension\AbstractExtension;
+
+/**
+ * Class MemcacheExtension
+ *
+ * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
+ */
+class MemcacheExtension extends AbstractExtension
 {
 }

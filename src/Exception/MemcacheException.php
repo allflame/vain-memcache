@@ -22,16 +22,27 @@ use Vain\Core\Exception\AbstractCoreException;
  */
 class MemcacheException extends AbstractCoreException
 {
+    private $memcache;
+
     /**
      * MemcacheException constructor.
      *
-     * @param MemcacheInterface $cache
+     * @param MemcacheInterface $memcache
      * @param string            $message
      * @param int               $code
      * @param \Exception        $previous
      */
-    public function __construct(MemcacheInterface $cache, string $message, int $code, \Exception $previous = null)
+    public function __construct(MemcacheInterface $memcache, string $message, int $code, \Exception $previous = null)
     {
-        parent::__construct($cache, $message, $code, $previous);
+        $this->memcache = $memcache;
+        parent::__construct($message, $code, $previous);
+    }
+
+    /**
+     * @return MemcacheInterface
+     */
+    public function getMemcache(): MemcacheInterface
+    {
+        return $this->memcache;
     }
 }
