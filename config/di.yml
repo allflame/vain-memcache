@@ -1,0 +1,11 @@
+services:
+  connection.factory.memcached:
+    class:
+    arguments: ['memcached']
+    tags:
+      - {name: connection.factory}
+  cache.factory.memcached:
+    class: Vain\Memcache\Memcached\Factory\MemcachedCacheFactory
+    arguments: ['memcached']
+    tags:
+      - {name: cache.factory}
