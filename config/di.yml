@@ -1,11 +1,11 @@
 services:
   connection.factory.memcached:
-    class:
+    class: Vain\Memcache\Connection\Factory\MemcachedConnectionFactory
     arguments: ['memcached']
     tags:
       - {name: connection.factory}
   cache.factory.memcached:
-    class: Vain\Memcache\Memcached\Factory\MemcachedCacheFactory
+    class: Vain\Memcache\Cache\Factory\MemcacheCacheFactory
     arguments: ['memcached']
     tags:
       - {name: cache.factory}

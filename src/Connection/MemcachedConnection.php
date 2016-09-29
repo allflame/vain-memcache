@@ -9,17 +9,17 @@
  * @link      https://github.com/allflame/vain-memcache
  */
 
-namespace Vain\Memcache\Memcached\Factory;
+namespace Vain\Memcache\Connection;
 
+use Vain\Connection\AbstractConnection;
 use Vain\Connection\Exception\NoRequiredFieldException;
-use Vain\Connection\Factory\AbstractConnectionFactory;
 
 /**
- * Class MemcachedConnectionFactory
+ * Class MemcachedConnection
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-class MemcachedConnectionFactory extends AbstractConnectionFactory
+class MemcachedConnection extends AbstractConnection
 {
     /**
      * @param array $config
@@ -42,9 +42,9 @@ class MemcachedConnectionFactory extends AbstractConnectionFactory
     /**
      * @inheritDoc
      */
-    public function createConnection(array $config)
+    public function doConnect(array $configData)
     {
-        list ($host, $port) = $this->getCredentials($config);
+        list ($host, $port) = $this->getCredentials($configData);
 
         $memcached = new \Memcached;
         $memcached->addServer($host, $port);

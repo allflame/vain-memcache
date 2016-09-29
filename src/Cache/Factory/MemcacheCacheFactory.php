@@ -9,24 +9,29 @@
  * @link      https://github.com/allflame/vain-memcache
  */
 
-namespace Vain\Memcache\Memcached\Factory;
+namespace Vain\Memcache\Cache\Factory;
 
 use Vain\Cache\CacheInterface;
 use Vain\Cache\Factory\AbstractCacheFactory;
+use Vain\Connection\ConnectionInterface;
+use Vain\Memcache\Connection\MemcachedConnection;
 use Vain\Memcache\Memcached\Memcached;
 
 /**
- * Class MemcachedCacheFactory
+ * Class MemcacheCacheFactory
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-class MemcachedCacheFactory extends AbstractCacheFactory
+class MemcacheCacheFactory extends AbstractCacheFactory
 {
     /**
      * @inheritDoc
      */
-    public function createCache(array $configData, $connection) : CacheInterface
+    public function createCache(array $configData, ConnectionInterface $connection) : CacheInterface
     {
+        /**
+         * @var MemcachedConnection $connection
+         */
         return new Memcached($connection);
     }
 }

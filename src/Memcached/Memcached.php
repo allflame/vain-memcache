@@ -8,10 +8,11 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://github.com/allflame/vain-cache
  */
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Vain\Memcache\Memcached;
 
+use Vain\Memcache\Connection\MemcachedConnection;
 use Vain\Memcache\MemcacheInterface;
 
 /**
@@ -21,17 +22,16 @@ use Vain\Memcache\MemcacheInterface;
  */
 class Memcached implements MemcacheInterface
 {
-
-    private $memcachedInstance;
+    private $memcachedConnection;
 
     /**
      * Memcache constructor.
      *
-     * @param \Memcached $memcachedInstance
+     * @param MemcachedConnection $memcachedInstance
      */
-    public function __construct(\Memcached $memcachedInstance)
+    public function __construct(MemcachedConnection $memcachedInstance)
     {
-        $this->memcachedInstance = $memcachedInstance;
+        $this->memcachedConnection = $memcachedInstance;
     }
 
     /**
@@ -39,7 +39,7 @@ class Memcached implements MemcacheInterface
      */
     public function set(string $key, $value, int $ttl) : bool
     {
-        return $this->memcachedInstance->set($key, $value, $ttl);
+        return $this->memcachedConnection->establish()->set($key, $value, $ttl);
     }
 
     /**
@@ -47,7 +47,7 @@ class Memcached implements MemcacheInterface
      */
     public function get(string $key)
     {
-        if (false === ($result = $this->memcachedInstance->get($key))) {
+        if (false === ($result = $this->memcachedConnection->establish()->get($key))) {
             return null;
         }
 
@@ -59,7 +59,7 @@ class Memcached implements MemcacheInterface
      */
     public function add(string $key, $value, int $ttl) : bool
     {
-        return $this->memcachedInstance->add($key, $value, $ttl);
+        return $this->memcachedConnection->establish()->add($key, $value, $ttl);
     }
 
     /**
@@ -67,7 +67,7 @@ class Memcached implements MemcacheInterface
      */
     public function del(string $key) : bool
     {
-        return $this->memcachedInstance->delete($key);
+        return $this->memcachedConnection->establish()->delete($key);
     }
 
     /**
@@ -83,6 +83,6 @@ class Memcached implements MemcacheInterface
      */
     public function expire(string $key, int $ttl) : bool
     {
-        return $this->memcachedInstance->touch($key, $ttl);
+        return $this->memcachedConnection->establish()->touch($key, $ttl);
     }
 }
