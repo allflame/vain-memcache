@@ -12,7 +12,6 @@
 namespace Vain\Memcache\Connection;
 
 use Vain\Connection\AbstractConnection;
-use Vain\Connection\Exception\NoRequiredFieldException;
 
 /**
  * Class MemcachedConnection
@@ -25,17 +24,9 @@ class MemcachedConnection extends AbstractConnection
      * @param array $config
      *
      * @return array
-     *
-     * @throws NoRequiredFieldException
      */
     protected function getCredentials(array $config) : array
     {
-        foreach (['host', 'port'] as $requiredField) {
-            if (false === array_key_exists($requiredField, $config)) {
-                throw new NoRequiredFieldException($this, $requiredField);
-            }
-        }
-
         return [$config['host'], $config['port']];
     }
 
