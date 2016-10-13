@@ -9,8 +9,7 @@ services:
       - {name: connection.factory}
   connection.factory.memcached.assert:
     class: Vain\Connection\Factory\Decorator\Assert\ConnectionFactoryAssertDecorator
-    decorates: connection.factory.memcached.trust
-    arguments: ['@connection.factory.memcached.assert.inner', '%memcached.config.required.fields%']
+    arguments: ['@connection.factory.memcached.trust', '%memcached.config.required.fields%']
   connection.factory.memcached: '@connection.factory.memcached.assert'
   cache.factory.memcached:
     class: Vain\Memcache\Cache\Factory\MemcacheCacheFactory
