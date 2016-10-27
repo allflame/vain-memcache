@@ -29,6 +29,6 @@ class BadMethodMemcacheException extends MemcacheException
      */
     public function __construct(MemcacheInterface $cache, string $method)
     {
-        parent::__construct($cache, sprintf('Method %s is not supported', $method), 0, null);
+        parent::__construct($cache, sprintf('Method %s is not supported', $method));
     }
 }

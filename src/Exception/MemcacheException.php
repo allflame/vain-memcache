@@ -8,7 +8,7 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  * @link      https://github.com/allflame/vain-cache
  */
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Vain\Memcache\Exception;
 
@@ -32,8 +32,12 @@ class MemcacheException extends AbstractCoreException
      * @param int               $code
      * @param \Exception        $previous
      */
-    public function __construct(MemcacheInterface $memcache, string $message, int $code, \Exception $previous = null)
-    {
+    public function __construct(
+        MemcacheInterface $memcache,
+        string $message,
+        int $code = 500,
+        \Exception $previous = null
+    ) {
         $this->memcache = $memcache;
         parent::__construct($message, $code, $previous);
     }
