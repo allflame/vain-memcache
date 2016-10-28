@@ -5,12 +5,13 @@ services:
   connection.factory.memcached.trust:
     class: Vain\Memcache\Connection\Factory\MemcachedConnectionFactory
     arguments: ['memcached']
-    tags:
-      - {name: connection.factory}
   connection.factory.memcached.assert:
     class: Vain\Connection\Factory\Decorator\Assert\ConnectionFactoryAssertDecorator
     arguments: ['@connection.factory.memcached.trust', '%memcached.config.required.fields%']
-  connection.factory.memcached: '@connection.factory.memcached.assert'
+  connection.factory.memcached:
+    alias: connection.factory.memcached.assert
+    tags:
+      - {name: connection.factory}
   cache.factory.memcached:
     class: Vain\Memcache\Cache\Factory\MemcacheCacheFactory
     arguments: ['memcached']
