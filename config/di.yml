@@ -1,15 +1,7 @@
-parameters:
-  memcached.config.required.fields: ['host', 'port']
-
 services:
-  connection.factory.memcached.trust:
+  connection.factory.memcached:
     class: Vain\Memcache\Connection\Factory\MemcachedConnectionFactory
     arguments: ['memcached']
-  connection.factory.memcached.assert:
-    class: Vain\Connection\Factory\Decorator\Assert\ConnectionFactoryAssertDecorator
-    arguments: ['@connection.factory.memcached.trust', '%memcached.config.required.fields%']
-  connection.factory.memcached:
-    alias: connection.factory.memcached.assert
     tags:
       - {name: connection.factory}
   cache.factory.memcached:

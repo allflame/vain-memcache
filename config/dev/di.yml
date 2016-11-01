@@ -1,0 +1,11 @@
+imports:
+  - { resource: '../di.yml' }
+
+parameters:
+  memcached.config.required.fields: ['host', 'port']
+
+services:
+  connection.factory.memcached:
+    class: Vain\Connection\Factory\Decorator\Assert\ConnectionFactoryAssertDecorator
+    decorates: connection.factory.memcached
+    arguments: ['@connection.factory.memcached.inner', '%memcached.config.required.fields%']
