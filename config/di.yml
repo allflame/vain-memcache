@@ -9,3 +9,8 @@ services:
     arguments: ['memcached']
     tags:
       - {name: cache.factory}
+  connection.factory.memcached.proxy:
+    class: Vain\Connection\Factory\Decorator\Proxy\ConnectionFactoryProxyDecorator
+    decorates: connection.memcached.doctrine
+    decoration_priority: 100
+    arguments: ['@connection.factory.memcached.proxy.inner']
