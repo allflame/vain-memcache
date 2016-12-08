@@ -12,7 +12,7 @@ declare(strict_types = 1);
 
 namespace Vain\Memcache\Memcached;
 
-use Vain\Memcache\Connection\MemcachedConnection;
+use Vain\Connection\ConnectionInterface;
 use Vain\Memcache\MemcacheInterface;
 
 /**
@@ -22,16 +22,16 @@ use Vain\Memcache\MemcacheInterface;
  */
 class Memcached implements MemcacheInterface
 {
-    private $memcachedConnection;
+    private $connection;
 
     /**
      * Memcache constructor.
      *
-     * @param MemcachedConnection $memcachedInstance
+     * @param ConnectionInterface $connection
      */
-    public function __construct(MemcachedConnection $memcachedInstance)
+    public function __construct(ConnectionInterface $connection)
     {
-        $this->memcachedConnection = $memcachedInstance;
+        $this->connection = $connection;
     }
 
     /**
@@ -39,7 +39,7 @@ class Memcached implements MemcacheInterface
      */
     public function set(string $key, $value, int $ttl) : bool
     {
-        return $this->memcachedConnection->establish()->set($key, $value, $ttl);
+        return $this->connection->establish()->set($key, $value, $ttl);
     }
 
     /**
@@ -47,7 +47,7 @@ class Memcached implements MemcacheInterface
      */
     public function get(string $key)
     {
-        if (false === ($result = $this->memcachedConnection->establish()->get($key))) {
+        if (false === ($result = $this->connection->establish()->get($key))) {
             return null;
         }
 
@@ -59,7 +59,7 @@ class Memcached implements MemcacheInterface
      */
     public function add(string $key, $value, int $ttl) : bool
     {
-        return $this->memcachedConnection->establish()->add($key, $value, $ttl);
+        return $this->connection->establish()->add($key, $value, $ttl);
     }
 
     /**
@@ -67,7 +67,7 @@ class Memcached implements MemcacheInterface
      */
     public function del(string $key) : bool
     {
-        return $this->memcachedConnection->establish()->delete($key);
+        return $this->connection->establish()->delete($key);
     }
 
     /**
@@ -83,6 +83,6 @@ class Memcached implements MemcacheInterface
      */
     public function expire(string $key, int $ttl) : bool
     {
-        return $this->memcachedConnection->establish()->touch($key, $ttl);
+        return $this->connection->establish()->touch($key, $ttl);
     }
 }
