@@ -25,8 +25,16 @@ class MemcachedConnectionFactory extends AbstractConnectionFactory
     /**
      * @inheritDoc
      */
-    public function createConnection(array $config) : ConnectionInterface
+    public function getName() : string
     {
-        return new MemcachedConnection($config);
+        return 'memcached';
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function createConnection(string $connectionName) : ConnectionInterface
+    {
+        return new MemcachedConnection($this->getConfigData($connectionName));
     }
 }

@@ -1,7 +1,7 @@
 services:
   connection.factory.memcached:
+    parent: connection.factory.abstract
     class: Vain\Memcache\Connection\Factory\MemcachedConnectionFactory
-    arguments: ['memcached']
     tags:
       - {name: connection.factory}
   cache.factory.memcached:
