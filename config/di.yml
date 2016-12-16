@@ -1,22 +1,13 @@
 parameters:
-  memcached.cache.name: 'memcached'
+  memcached.connection.name: 'memcached'
 
 services:
   connection.memcached:
+    parent: connection.abstract
     class: Vain\Memcache\Connection\MemcachedConnection
-    factory: ['@connection.factory.memcached', 'createConnection']
-    arguments:
-      - '%memcached.cache.name%'
-  connection.factory.memcached:
-    parent: connection.factory.abstract
-    class: Vain\Memcache\Connection\Factory\MemcachedConnectionFactory
+    arguments: ['%memcached.connection.name%']
   cache.factory.memcached:
     class: Vain\Memcache\Cache\Factory\MemcacheCacheFactory
     arguments: ['memcached']
     tags:
       - {name: cache.factory}
-  connection.factory.memcached.proxy:
-    class: Vain\Core\Connection\Factory\Decorator\Proxy\ConnectionFactoryProxyDecorator
-    decorates: connection.memcached.doctrine
-    decoration_priority: 100
-    arguments: ['@connection.factory.memcached.proxy.inner']

@@ -11,28 +11,15 @@
 
 namespace Vain\Memcache\Connection;
 
-use Vain\Core\Connection\ConnectionInterface;
+use Vain\Core\Connection\AbstractConnection;
 
 /**
  * Class MemcachedConnection
  *
  * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
  */
-class MemcachedConnection implements ConnectionInterface
+class MemcachedConnection extends AbstractConnection
 {
-
-    private $configData;
-
-    /**
-     * MemcachedConnection constructor.
-     *
-     * @param array $configData
-     */
-    public function __construct(array $configData)
-    {
-        $this->configData = $configData;
-    }
-
     /**
      * @param array $config
      *
@@ -46,17 +33,9 @@ class MemcachedConnection implements ConnectionInterface
     /**
      * @inheritDoc
      */
-    public function getName() : string
-    {
-        return $this->configData['driver'];
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function establish()
     {
-        list ($host, $port) = $this->getCredentials($this->configData);
+        list ($host, $port) = $this->getCredentials($this->getConfigData());
 
         $memcached = new \Memcached;
         $memcached->addServer($host, $port);
