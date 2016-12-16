@@ -1,9 +1,15 @@
+parameters:
+  memcached.cache.name: 'memcached'
+
 services:
+  connection.memcached:
+    class: Vain\Memcache\Connection\MemcachedConnection
+    factory: ['@connection.factory.memcached', 'createConnection']
+    arguments:
+      - '%memcached.cache.name%'
   connection.factory.memcached:
     parent: connection.factory.abstract
     class: Vain\Memcache\Connection\Factory\MemcachedConnectionFactory
-    tags:
-      - {name: connection.factory}
   cache.factory.memcached:
     class: Vain\Memcache\Cache\Factory\MemcacheCacheFactory
     arguments: ['memcached']
