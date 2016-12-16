@@ -12,7 +12,7 @@ declare(strict_types = 1);
 
 namespace Vain\Memcache\Memcached;
 
-use Vain\Connection\ConnectionInterface;
+use Vain\Core\Connection\ConnectionInterface;
 use Vain\Memcache\MemcacheInterface;
 
 /**

@@ -11,7 +11,7 @@
 
 namespace Vain\Memcache\Connection;
 
-use Vain\Connection\ConnectionInterface;
+use Vain\Core\Connection\ConnectionInterface;
 
 /**
  * Class MemcachedConnection

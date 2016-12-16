@@ -13,7 +13,7 @@ namespace Vain\Memcache\Cache\Factory;
 
 use Vain\Cache\CacheInterface;
 use Vain\Cache\Factory\AbstractCacheFactory;
-use Vain\Connection\ConnectionInterface;
+use Vain\Core\Connection\ConnectionInterface;
 use Vain\Memcache\Connection\MemcachedConnection;
 use Vain\Memcache\Memcached\Memcached;
 
