@@ -12,7 +12,7 @@
 namespace Vain\Memcache\Connection\Factory;
 
 use Vain\Core\Connection\ConnectionInterface;
-use Vain\Connection\Factory\AbstractConnectionFactory;
+use Vain\Core\Connection\Factory\AbstractConnectionFactory;
 use Vain\Memcache\Connection\MemcachedConnection;
 
 /**

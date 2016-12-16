@@ -6,12 +6,12 @@ parameters:
 
 services:
   connection.factory.memcached.assert:
-    class: Vain\Connection\Factory\Decorator\Assert\ConnectionFactoryAssertDecorator
+    class: Vain\Core\Connection\Factory\Decorator\Assert\ConnectionFactoryAssertDecorator
     decorates: connection.factory.memcached
     decoration_priority: 900
     arguments: ['@connection.factory.memcached.assert.inner', '%memcached.config.required.fields%']
   connection.factory.memcached.logger:
-    class: Vain\Connection\Factory\Decorator\Logger\ConnectionFactoryLoggerDecorator
+    class: Vain\Core\Connection\Factory\Decorator\Logger\ConnectionFactoryLoggerDecorator
     decorates: connection.factory.memcached
     decoration_priority: 1000
     arguments: ['@connection.factory.memcached.logger.inner', '@logger.connection']
