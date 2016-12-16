@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace Vain\Memcache;
 
-use Vain\Cache\CacheInterface;
+use Vain\Core\Cache\CacheInterface;
 
 /**
  * Interface MemcacheInterface
